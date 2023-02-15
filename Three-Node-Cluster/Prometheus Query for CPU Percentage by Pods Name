@@ -1,0 +1,1 @@
+sum(rate(container_cpu_usage_seconds_total{container_name!="POD", container_name!="", pod_name=~"<pod-name>", namespace="<namespace>"}[1m])) by (pod_name) / on (pod_name) group_left(node_name) sum(kube_pod_container_resource_limits_cpu_cores{pod=~"<pod-name>", namespace="<namespace>"}) * count(kube_pod_info{pod=~"<pod-name>", namespace="<namespace>"}) * 100
